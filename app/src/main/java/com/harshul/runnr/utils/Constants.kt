@@ -16,4 +16,13 @@ object Constants {
     const val NOTIFICATION_CHANNEL_NAME = "Tracking"
     const val NOTIFICATION_ID = 1
 
+    const val SHARED_PREFERENCES_NAME = "sharedPref"
+    const val KEY_FIRST_TIME_KEY_TOGGLE = "KEY_FIRST_TIME_KEY_TOGGLE"
+    const val KEY_NAME = "KEY_NAME"
+    const val KEY_WEIGHT = "KEY_WEIGHT"
+
+    const val MAP_LINE_WIDTH = 12f
+
+    const val CANCEL_TRACKING_DIALOG_TAG = "CANCEL_TRACKING_DIALOG_TAG"
+
 }

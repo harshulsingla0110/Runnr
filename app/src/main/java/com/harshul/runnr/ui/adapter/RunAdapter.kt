@@ -11,6 +11,7 @@ import com.harshul.runnr.databinding.ItemRunBinding
 import com.harshul.runnr.utils.TrackingUtility
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.round
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
@@ -43,13 +44,14 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = run.timestamp
             }
-            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("hh:mm aaa, E, dd MMM yy", Locale.getDefault())
             binding.tvDate.text = dateFormat.format(calendar.time)
 
             val avgSpeed = "${run.avgSpeedInKMH}km/h"
             binding.tvAvgSpeed.text = avgSpeed
 
-            val distanceInKm = "${run.distanceInMeters / 1000f}km"
+            val distanceInKm = "${round(run.distanceInMeters / 1000f * 100) / 100}km Morning Run"
+            //val distanceInKm = "${run.distanceInMeters / 1000f }km Morning Run"
             binding.tvDistance.text = distanceInKm
 
             binding.tvTime.text = TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)

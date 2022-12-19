@@ -3,56 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dark_mid_grey">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clInnerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/md_blue_800"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelHeading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/labelHeading"
+        app:srcCompat="@drawable/ic_close_white" />
+
+    <ImageView
+        android:id="@+id/ivRunning"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelHeading"
+        app:layout_constraintEnd_toStartOf="@+id/labelHeading"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/labelHeading"
+        app:srcCompat="@drawable/ic_run"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/labelHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:text="Running"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivRunning"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvRunImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:elevation="0dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/clInnerLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView">
+        app:layout_constraintTop_toBottomOf="@+id/labelHeading">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00:00:00"
-            android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnToggleRun"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnToggleRun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnFinishRun"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
+    </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFinishRun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Finish Run"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvLetsGo"
@@ -68,14 +79,193 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clInnerLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/clInnerLayout"
+        android:background="@color/dark_mid_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/ivNavigate"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/labelDistance"
+            app:layout_constraintEnd_toStartOf="@+id/tvDistance"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDistance"
+            app:srcCompat="@drawable/ic_navigate"
+            app:tint="@color/main_color" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/montserrat_alternates_semibold"
+            android:text="0.0"
+            android:textColor="@color/white"
+            android:textSize="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/labelDistance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivNavigate" />
+
+        <TextView
+            android:id="@+id/labelDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/montserrat_alternates"
+            android:text="Distance (km)"
+            android:textColor="@color/mid_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/ivDuration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivSpeed"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvTimer"
+            app:layout_constraintEnd_toStartOf="@+id/ivDuration"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_speed_b"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvSpeed"
+            style="@style/run_fragment_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24 km/h"
+            app:layout_constraintBottom_toTopOf="@+id/labelDuration"
+            app:layout_constraintEnd_toEndOf="@+id/ivSpeed"
+            app:layout_constraintStart_toStartOf="@+id/ivSpeed" />
+
+        <TextView
+            android:id="@+id/labelSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates"
+            android:text="Speed"
+            android:textColor="@color/mid_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/labelDuration"
+            app:layout_constraintEnd_toEndOf="@+id/ivSpeed"
+            app:layout_constraintStart_toStartOf="@+id/ivSpeed" />
+
+        <ImageView
+            android:id="@+id/ivDuration"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvTimer"
+            app:layout_constraintEnd_toStartOf="@+id/ivCalorie"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivSpeed"
+            app:srcCompat="@drawable/ic_duration_b"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvTimer"
+            style="@style/run_fragment_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            app:layout_constraintBottom_toTopOf="@+id/labelDuration"
+            app:layout_constraintEnd_toEndOf="@+id/ivDuration"
+            app:layout_constraintStart_toStartOf="@+id/ivDuration" />
+
+        <TextView
+            android:id="@+id/labelDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/montserrat_alternates"
+            android:text="Duration"
+            android:textColor="@color/mid_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnToggleRun"
+            app:layout_constraintEnd_toEndOf="@+id/ivDuration"
+            app:layout_constraintStart_toStartOf="@+id/ivDuration" />
+
+        <ImageView
+            android:id="@+id/ivCalorie"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvTimer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivDuration"
+            app:srcCompat="@drawable/ic_calories_b"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvCalorie"
+            style="@style/run_fragment_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250 kcal"
+            app:layout_constraintBottom_toTopOf="@+id/labelDuration"
+            app:layout_constraintEnd_toEndOf="@+id/ivCalorie"
+            app:layout_constraintStart_toStartOf="@+id/ivCalorie" />
+
+        <TextView
+            android:id="@+id/labelCalorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates"
+            android:text="Calorie"
+            android:textColor="@color/mid_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/labelDuration"
+            app:layout_constraintEnd_toEndOf="@+id/ivCalorie"
+            app:layout_constraintStart_toStartOf="@+id/ivCalorie" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnToggleRun"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/circle"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="Start"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFinishRun"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circle"
+            android:fontFamily="@font/montserrat_alternates"
+            android:text="Finish"
+            android:textAllCaps="false"
+            android:textSize="12dp"
+            android:visibility="gone"
+            app:icon="@drawable/ic_finish"
+            app:iconGravity="textTop"
+            app:iconSize="24dp"
+            app:backgroundTint="@color/dark_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/btnToggleRun"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnToggleRun"
+            app:layout_constraintTop_toTopOf="@+id/btnToggleRun"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

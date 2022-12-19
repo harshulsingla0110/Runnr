@@ -8,6 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,9 +60,12 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
+        app:itemTextAppearanceActive="@style/CustomTextItem"
+        app:itemTextAppearanceInactive="@style/CustomTextItemUnselected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 

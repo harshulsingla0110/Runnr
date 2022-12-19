@@ -22,4 +22,16 @@
     <color name="md_blue_A700">#2962FF</color>
     <color name="colorAccent">#FFE600</color>
     <color name="errorColor">#D50000</color>
+
+    <color name="main_color">#FB5454</color>
+    <color name="secondary_color">#120C32</color>
+    <color name="black_light">#282828</color>
+    <color name="black_dark">#151515</color>
+    <color name="light_grey">#EAEAEA</color>
+    <color name="mid_grey">#868686</color>
+    <color name="mid_grey_2">#939DA2</color>
+    <color name="dark_grey">#384147</color>
+    <color name="dark_mid_grey">#192225</color>
+
+
 </resources>

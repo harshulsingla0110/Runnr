@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_player_running" />
+
+        <TextView
+            android:id="@+id/labelHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_semibold"
+            android:text="Cancel the run?"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/labelSubHeading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_alternates"
+            android:text="Are you sure, you want to cancel the current run and delete all its data?"
+            android:textColor="@color/dark_grey"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/labelHeading" />
+
+        <Button
+            android:id="@+id/buttonYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="Yes"
+            android:textAllCaps="false"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/buttonNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="32dp"
+            android:paddingBottom="16dp"
+            android:text="No"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonYes"
+            app:layout_constraintEnd_toStartOf="@+id/buttonYes"
+            app:layout_constraintTop_toTopOf="@+id/buttonYes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

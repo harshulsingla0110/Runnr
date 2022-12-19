@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/runFragment"
-        android:icon="@drawable/ic_run"
-        android:title="Your Runs" />
+        android:icon="@drawable/activity_selector"
+        android:title="Activity" />
 
     <item
         android:id="@+id/statisticsFragment"
-        android:icon="@drawable/ic_graph"
+        android:icon="@drawable/statistics_selector"
         android:title="Statistics" />
 
     <item
         android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/settings_selector"
         android:title="Settings" />
 
 </menu>

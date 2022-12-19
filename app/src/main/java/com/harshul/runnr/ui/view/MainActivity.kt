@@ -23,10 +23,11 @@ class MainActivity : AppCompatActivity() {
 
         navigateToTrackingFragmentIfNeeded(intent)
 
-        setSupportActionBar(binding.toolbar)
+        //setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.navHostFragment)
         binding.bottomNavigationView.setupWithNavController(navController)
+        binding.bottomNavigationView.setOnItemReselectedListener { /*No-OPERATION*/ }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

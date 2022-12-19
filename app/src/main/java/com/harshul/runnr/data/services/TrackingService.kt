@@ -62,6 +62,7 @@ class TrackingService : LifecycleService() {
         super.onCreate()
         currentNotificationBuilder = baseNotificationBuilder
         postInitialValue()
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         isTracking.observe(this, Observer {
@@ -174,11 +175,20 @@ class TrackingService : LifecycleService() {
     private fun updateLocationTracking(isTracking: Boolean) {
         if (isTracking) {
             //todo: check for location permissions
-            val request = com.google.android.gms.location.LocationRequest().apply {
+
+            val request = LocationRequest.Builder(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                Constants.LOCATION_UPDATE_INTERVAL
+            ).setMinUpdateIntervalMillis(Constants.FASTEST_LOCATION_INTERVAL)
+                .setMaxUpdateDelayMillis(Constants.LOCATION_UPDATE_INTERVAL)
+                .build()
+
+            /*val request = LocationRequest().apply {
                 interval = Constants.LOCATION_UPDATE_INTERVAL
                 fastestInterval = Constants.FASTEST_LOCATION_INTERVAL
                 priority = Priority.PRIORITY_HIGH_ACCURACY
-            }
+            }*/
+
             fusedLocationProviderClient.requestLocationUpdates(
                 request,
                 locationCallback,

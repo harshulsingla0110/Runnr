@@ -17,6 +17,7 @@ import com.harshul.runnr.ui.viewmodel.MainViewModel
 import com.harshul.runnr.utils.SortType
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run) {
 
@@ -27,6 +28,12 @@ class RunFragment : Fragment(R.layout.fragment_run) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().window.apply {
+            navigationBarColor = requireActivity().getColor(R.color.white)
+            statusBarColor = requireActivity().getColor(R.color.white)
+            this.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
 
         setupRecyclerView()
 
@@ -60,6 +67,13 @@ class RunFragment : Fragment(R.layout.fragment_run) {
         }
 
         viewModel.runs.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+                binding.groupNoRun.visibility = View.VISIBLE
+                binding.rvRuns.visibility = View.GONE
+            } else {
+                binding.groupNoRun.visibility = View.GONE
+                binding.rvRuns.visibility = View.VISIBLE
+            }
             runAdapter.submitList(it)
         })
 
