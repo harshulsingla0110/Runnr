@@ -1,5 +1,7 @@
 package com.harshul.runnr.ui.view.fragments
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +16,16 @@ import com.harshul.runnr.R
 import com.harshul.runnr.databinding.FragmentRunBinding
 import com.harshul.runnr.ui.adapter.RunAdapter
 import com.harshul.runnr.ui.viewmodel.MainViewModel
+import com.harshul.runnr.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.harshul.runnr.utils.SortType
+import com.harshul.runnr.utils.TrackingUtility
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 
 
 @AndroidEntryPoint
-class RunFragment : Fragment(R.layout.fragment_run) {
+class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
 
     lateinit var binding: FragmentRunBinding
 
@@ -34,6 +40,7 @@ class RunFragment : Fragment(R.layout.fragment_run) {
             statusBarColor = requireActivity().getColor(R.color.white)
             this.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
+
 
         setupRecyclerView()
 
@@ -78,7 +85,9 @@ class RunFragment : Fragment(R.layout.fragment_run) {
         })
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+            if (TrackingUtility.hasLocationPermissions(requireContext())) {
+                findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+            } else requestPermissions()
         }
     }
 
@@ -88,6 +97,26 @@ class RunFragment : Fragment(R.layout.fragment_run) {
         layoutManager = LinearLayoutManager(requireContext())
     }
 
+    private fun requestPermissions() {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            EasyPermissions.requestPermissions(
+                this, "You need to accept location permissions to use this app.",
+                REQUEST_CODE_LOCATION_PERMISSION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        } else {
+            EasyPermissions.requestPermissions(
+                this, "You need to accept location permissions to use this app.",
+                REQUEST_CODE_LOCATION_PERMISSION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -95,6 +124,24 @@ class RunFragment : Fragment(R.layout.fragment_run) {
     ): View? {
         binding = FragmentRunBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this)
+                .build().show()
+        } else requestPermissions()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
 }

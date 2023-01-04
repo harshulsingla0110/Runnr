@@ -25,4 +25,6 @@ object Constants {
 
     const val CANCEL_TRACKING_DIALOG_TAG = "CANCEL_TRACKING_DIALOG_TAG"
 
+    const val REQUEST_CODE_LOCATION_PERMISSION = 1001
+
 }
