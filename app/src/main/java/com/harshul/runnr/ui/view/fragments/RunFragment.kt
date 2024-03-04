@@ -18,6 +18,7 @@ import com.harshul.runnr.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.harshul.runnr.utils.SortType
 import com.harshul.runnr.utils.TrackingUtility
 import com.harshul.runnr.utils.gone
+import com.harshul.runnr.utils.lightTheme
 import com.harshul.runnr.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -43,6 +44,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().lightTheme()
         setupRecyclerView()
 
         when (viewModel.sortType) {
