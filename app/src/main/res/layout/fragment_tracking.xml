@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_alternates_medium"
-        android:text="Running"
+        android:text="@string/running"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,13 +107,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:fontFamily="@font/montserrat_alternates_semibold"
-            android:text="0.0"
             android:textColor="@color/white"
             android:textSize="48dp"
             app:layout_constraintBottom_toTopOf="@+id/labelDistance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ivNavigate" />
+            app:layout_constraintStart_toEndOf="@+id/ivNavigate"
+            tools:text="0.0" />
 
         <TextView
             android:id="@+id/labelDistance"
@@ -145,17 +145,17 @@
             style="@style/run_fragment_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="24 km/h"
             app:layout_constraintBottom_toTopOf="@+id/labelDuration"
             app:layout_constraintEnd_toEndOf="@+id/ivSpeed"
-            app:layout_constraintStart_toStartOf="@+id/ivSpeed" />
+            app:layout_constraintStart_toStartOf="@+id/ivSpeed"
+            tools:text="24 km/h" />
 
         <TextView
             android:id="@+id/labelSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_alternates"
-            android:text="Speed"
+            android:text="@string/speed"
             android:textColor="@color/mid_grey"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/labelDuration"
@@ -179,10 +179,10 @@
             style="@style/run_fragment_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00"
             app:layout_constraintBottom_toTopOf="@+id/labelDuration"
             app:layout_constraintEnd_toEndOf="@+id/ivDuration"
-            app:layout_constraintStart_toStartOf="@+id/ivDuration" />
+            app:layout_constraintStart_toStartOf="@+id/ivDuration"
+            tools:text="00:00" />
 
         <TextView
             android:id="@+id/labelDuration"
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:fontFamily="@font/montserrat_alternates"
-            android:text="Duration"
+            android:text="@string/duration"
             android:textColor="@color/mid_grey"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btnToggleRun"
@@ -214,17 +214,17 @@
             style="@style/run_fragment_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="250 kcal"
             app:layout_constraintBottom_toTopOf="@+id/labelDuration"
             app:layout_constraintEnd_toEndOf="@+id/ivCalorie"
-            app:layout_constraintStart_toStartOf="@+id/ivCalorie" />
+            app:layout_constraintStart_toStartOf="@+id/ivCalorie"
+            tools:text="250 kcal" />
 
         <TextView
             android:id="@+id/labelCalorie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_alternates"
-            android:text="Calorie"
+            android:text="@string/calorie"
             android:textColor="@color/mid_grey"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/labelDuration"
@@ -238,7 +238,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/circle"
             android:fontFamily="@font/montserrat_alternates_medium"
-            android:text="Start"
+            android:text="@string/start"
             android:textAllCaps="false"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -251,14 +251,14 @@
             android:layout_height="80dp"
             android:background="@drawable/circle"
             android:fontFamily="@font/montserrat_alternates"
-            android:text="Finish"
+            android:text="@string/finish"
             android:textAllCaps="false"
             android:textSize="12dp"
             android:visibility="gone"
+            app:backgroundTint="@color/dark_grey"
             app:icon="@drawable/ic_finish"
             app:iconGravity="textTop"
             app:iconSize="24dp"
-            app:backgroundTint="@color/dark_grey"
             app:layout_constraintBottom_toBottomOf="@+id/btnToggleRun"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnToggleRun"

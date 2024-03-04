@@ -8,4 +8,14 @@
         <item>Calories Burned</item>
     </string-array>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCGPWomHPPFjN3hRWoRsChWmlTuxtAtNkU</string>
+    <string name="create_your_first_run">Create your first Run!</string>
+    <string name="speed">Speed</string>
+    <string name="duration">Duration</string>
+    <string name="calorie">Calorie</string>
+    <string name="finish">Finish</string>
+    <string name="start">Start</string>
+    <string name="running">Running</string>
+    <string name="activity_log">Activity Log</string>
+    <string name="tap_to_create_your_first_run">Tap + to create your first run.</string>
+    <string name="sort_by">Sort by:</string>
 </resources>

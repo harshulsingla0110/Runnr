@@ -145,12 +145,12 @@ class TrackingService : LifecycleService() {
             val pauseIntent = Intent(this, TrackingService::class.java).apply {
                 action = Constants.ACTION_PAUSE_SERVICE
             }
-            PendingIntent.getService(this, 1, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getService(this, 1, pauseIntent, PendingIntent.FLAG_IMMUTABLE)
         } else {
             val resumeIntent = Intent(this, TrackingService::class.java).apply {
                 action = Constants.ACTION_START_OR_RESUME_SERVICE
             }
-            PendingIntent.getService(this, 2, resumeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getService(this, 2, resumeIntent, PendingIntent.FLAG_IMMUTABLE)
         }
 
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager

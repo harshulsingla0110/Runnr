@@ -17,14 +17,14 @@ import kotlin.math.round
 @AndroidEntryPoint
 class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
-    lateinit var binding: FragmentStatisticsBinding
+    private lateinit var binding: FragmentStatisticsBinding
     private val viewModel: StatisticsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentStatisticsBinding.inflate(inflater)
         return binding.root
     }
@@ -36,7 +36,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
     private fun subscribeToObservers() {
 
-        viewModel.totaltimeRun.observe(viewLifecycleOwner, Observer { timeInMillis ->
+        viewModel.totaltimeRun.observe(viewLifecycleOwner) { timeInMillis ->
             timeInMillis?.let {
                 var milliseconds = timeInMillis
                 val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
@@ -49,28 +49,28 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 else "${hours}h".also { binding.tvTime.text = it }
 
             }
-        })
+        }
 
-        viewModel.totalDistance.observe(viewLifecycleOwner, Observer {
+        viewModel.totalDistance.observe(viewLifecycleOwner) {
             it?.let {
                 val km = it / 1000f
                 val totalDistance = round(km * 10f) / 10f
                 binding.tvDistance.text = "$totalDistance"
             }
-        })
+        }
 
-        viewModel.totalCaloriesBurned.observe(viewLifecycleOwner, Observer {
+        viewModel.totalCaloriesBurned.observe(viewLifecycleOwner) {
             it?.let {
                 binding.tvCalorie.text = "$it"
             }
-        })
+        }
 
-        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, Observer {
+        viewModel.totalAvgSpeed.observe(viewLifecycleOwner) {
             it?.let {
                 val avgSpeed = round(it * 10f) / 10f
                 binding.tvSpeed.text = "$avgSpeed"
             }
-        })
+        }
 
 
     }

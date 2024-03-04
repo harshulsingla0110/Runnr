@@ -25,6 +25,7 @@ import com.harshul.runnr.databinding.FragmentTrackingBinding
 import com.harshul.runnr.ui.viewmodel.MainViewModel
 import com.harshul.runnr.utils.Constants
 import com.harshul.runnr.utils.TrackingUtility
+import com.harshul.runnr.utils.setNavStatusColor
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -47,13 +48,13 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     @set: Inject
     var weight = 80f
 
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentTrackingBinding.inflate(inflater)
         return binding.root
@@ -64,18 +65,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         super.onViewCreated(view, savedInstanceState)
         binding.mapView.onCreate(savedInstanceState)
 
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        requireActivity().window.apply {
-            navigationBarColor = requireActivity().getColor(R.color.dark_mid_grey)
-            statusBarColor = requireActivity().getColor(R.color.dark_mid_grey)
-            this.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-        }
+        requireActivity().setNavStatusColor(R.color.dark_mid_grey)
 
         if (savedInstanceState != null) {
-            val cancelTrackingDialog =
-                parentFragmentManager.findFragmentByTag(Constants.CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+            val cancelTrackingDialog = parentFragmentManager.findFragmentByTag(Constants.CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
             cancelTrackingDialog?.setYesListener { stopRun() }
         }
 

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(val repository: MainRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
     private val runSortedByDate = repository.getAllRunsSortedByData()
     private val runSortedByDistance = repository.getAllRunsSortedByDistance()

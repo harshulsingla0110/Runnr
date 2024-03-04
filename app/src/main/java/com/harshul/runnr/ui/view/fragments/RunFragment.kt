@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.harshul.runnr.R
 import com.harshul.runnr.databinding.FragmentRunBinding
 import com.harshul.runnr.ui.adapter.RunAdapter
@@ -19,6 +17,8 @@ import com.harshul.runnr.ui.viewmodel.MainViewModel
 import com.harshul.runnr.utils.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.harshul.runnr.utils.SortType
 import com.harshul.runnr.utils.TrackingUtility
+import com.harshul.runnr.utils.gone
+import com.harshul.runnr.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -27,20 +27,21 @@ import pub.devrel.easypermissions.EasyPermissions
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
 
-    lateinit var binding: FragmentRunBinding
-
+    private lateinit var binding: FragmentRunBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var runAdapter: RunAdapter
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentRunBinding.inflate(inflater)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        requireActivity().window.apply {
-            navigationBarColor = requireActivity().getColor(R.color.white)
-            statusBarColor = requireActivity().getColor(R.color.white)
-            this.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
-
 
         setupRecyclerView()
 
@@ -73,16 +74,16 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
 
         }
 
-        viewModel.runs.observe(viewLifecycleOwner, Observer {
+        viewModel.runs.observe(viewLifecycleOwner) {
             if (it.isNullOrEmpty()) {
-                binding.groupNoRun.visibility = View.VISIBLE
-                binding.rvRuns.visibility = View.GONE
+                binding.groupNoRun.visible()
+                binding.rvRuns.gone()
             } else {
-                binding.groupNoRun.visibility = View.GONE
-                binding.rvRuns.visibility = View.VISIBLE
+                binding.groupNoRun.gone()
+                binding.rvRuns.visible()
             }
             runAdapter.submitList(it)
-        })
+        }
 
         binding.fab.setOnClickListener {
             if (TrackingUtility.hasLocationPermissions(requireContext())) {
@@ -94,7 +95,6 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     private fun setupRecyclerView() = binding.rvRuns.apply {
         runAdapter = RunAdapter()
         adapter = runAdapter
-        layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun requestPermissions() {
@@ -115,15 +115,6 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRunBinding.inflate(inflater)
-        return binding.root
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}

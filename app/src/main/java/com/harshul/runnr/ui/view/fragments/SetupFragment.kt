@@ -26,6 +26,15 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
     @set: Inject
     var isFirstAppOpen = true
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSetupBinding.inflate(inflater)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,15 +71,6 @@ class SetupFragment : Fragment(R.layout.fragment_setup) {
             .apply()
 
         return true
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSetupBinding.inflate(inflater)
-        return binding.root
     }
 
 }

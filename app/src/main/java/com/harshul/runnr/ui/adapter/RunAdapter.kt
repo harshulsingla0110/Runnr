@@ -10,12 +10,13 @@ import com.harshul.runnr.data.models.Run
 import com.harshul.runnr.databinding.ItemRunBinding
 import com.harshul.runnr.utils.TrackingUtility
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 import kotlin.math.round
 
 class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
-    val diffCallback = object : DiffUtil.ItemCallback<Run>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<Run>() {
         override fun areItemsTheSame(oldItem: Run, newItem: Run): Boolean {
             return oldItem.id == newItem.id
         }
@@ -25,7 +26,7 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
         }
     }
 
-    val differ = AsyncListDiffer(this, diffCallback)
+    private val differ = AsyncListDiffer(this, diffCallback)
 
     fun submitList(list: List<Run>) = differ.submitList(list)
 
@@ -35,11 +36,19 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RunViewHolder, position: Int) {
-
         val run = differ.currentList[position]
+        holder.bind(run)
+    }
 
-        with(holder) {
-            Glide.with(holder.itemView).load(run.img).into(binding.ivRunImage)
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+    inner class RunViewHolder(
+        private val binding: ItemRunBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(run: Run) {
+            Glide.with(binding.ivRunImage.context).load(run.img).into(binding.ivRunImage)
 
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = run.timestamp
@@ -58,14 +67,7 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
             val caloriesBurned = "${run.caloriesBurned}kcal"
             binding.tvCalories.text = caloriesBurned
-
         }
     }
-
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
-
-    inner class RunViewHolder(val binding: ItemRunBinding) : RecyclerView.ViewHolder(binding.root)
 
 }
